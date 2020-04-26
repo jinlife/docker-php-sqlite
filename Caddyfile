@@ -4,7 +4,7 @@ browse
 
 fastcgi / 127.0.0.1:9000 php
 
-on startup php-fpm7
+on startup php-fpm
 
 log stdout
 

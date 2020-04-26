@@ -10,7 +10,7 @@ $DOMAIN {
     gzip
     cache
     fastcgi / 127.0.0.1:9000 php
-    on startup php-fpm
+    on startup php-fpm --nodaemonize
     rewrite {
         if {file} not feed.xml
         to {path} {path}/ /index.php?{query}
@@ -25,7 +25,7 @@ cat > /etc/Caddyfile << EOF
     gzip
     cache
     fastcgi / 127.0.0.1:9000 php
-    on startup php-fpm
+    on startup php-fpm --nodaemonize
     rewrite {
         if {file} not feed.xml
         to {path} {path}/ /index.php?{query}
