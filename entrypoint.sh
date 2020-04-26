@@ -36,4 +36,4 @@ cat > /etc/Caddyfile << EOF
 EOF
 fi
 
-caddy --conf /etc/Caddyfile --log stdout --agree=$ACME_AGREE -quic
+/usr/bin/caddy --conf /etc/Caddyfile --log stdout

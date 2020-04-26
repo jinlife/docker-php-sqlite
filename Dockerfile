@@ -10,8 +10,6 @@ RUN curl --silent --show-error --fail --location \
     && /usr/bin/caddy -version
 
 COPY Caddyfile /etc/Caddyfile
-# Let's Encrypt Agreement
-ENV ACME_AGREE="false"
 
 ENV CADDYPATH=/srv/caddycerts
 
