@@ -2,10 +2,9 @@ FROM php:7.2-fpm-alpine
 
 LABEL maintainer "Jinlife <admin@jinlife.com>"
 
-ARG plugins=http.cgi,http.cors,http.filemanager,http.git,http.proxyprotocol,http.realip,http.upload,net
 RUN curl --silent --show-error --fail --location \
     --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-    "https://caddyserver.com/download/linux/amd64?plugins=${plugins}&license=personal" \
+    "https://caddyserver.com/download/linux/amd64?plugins=http.jwt,http.login,http.prometheus,http.realip,http.restic,http.expires&license=personal&telemetry=off" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
     && chmod 0755 /usr/bin/caddy \
     && /usr/bin/caddy -version
