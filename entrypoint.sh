@@ -1,7 +1,5 @@
 #!/bin/sh
 
-test -e /srv/index.php || cp -a /opt/typecho-master/* /srv/html/
-
 chmod -R 777 /srv/html
 
 if   [   $DOMAIN && $EMAIL   ]; 
@@ -38,4 +36,4 @@ cat > /etc/Caddyfile << EOF
 EOF
 fi
 
-/bin/parent caddy --conf /etc/Caddyfile --log stdout --agree=$ACME_AGREE -quic
+caddy --conf /etc/Caddyfile --log stdout --agree=$ACME_AGREE -quic
