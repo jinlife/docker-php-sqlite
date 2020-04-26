@@ -25,8 +25,12 @@ RUN rm -rf /etc/localtime \
     && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" /etc/timezone
 	
-#Support GD extension
-RUN docker-php-ext-install opcache mysqli pdo_mysql mbstring zip pcntl gd
+#Support GD extension https://www.cnblogs.com/liyuchuan/p/11718798.html
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && apk update \
+    && apk add libpng-dev freetype-dev libjpeg-turbo-dev \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/  \
+    && docker-php-ext-install -j$(nproc) gd
 
 WORKDIR /srv/html
 
