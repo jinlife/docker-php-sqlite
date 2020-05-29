@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine
+FROM php:7.2.31-fpm-alpine
 
 LABEL maintainer "Jinlife <admin@jinlife.com>"
 
@@ -34,7 +34,7 @@ RUN apk add --no-cache \
     --with-png-dir=/usr/include/ \
     --with-jpeg-dir=/usr/include/ && \
   NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
-  && docker-php-ext-install -j${NPROC} gd pdo pdo_mysql pdo_sqlite opcache zip \
+  && docker-php-ext-install -j${NPROC} gd pdo pdo_mysql pdo_sqlite sqlite3 opcache zip \
   && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 WORKDIR /srv/html
