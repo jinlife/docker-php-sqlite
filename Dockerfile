@@ -1,4 +1,4 @@
-FROM php:7.2.31-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 LABEL maintainer "Jinlife <admin@jinlife.com>"
 
@@ -27,14 +27,10 @@ RUN rm -rf /etc/localtime \
 	
 # Support GD extension https://github.com/ThanisornJ/Docker-Laravel/blob/db92988506636273aa03e5101a47a5b52a6bfe73/docker-php-alpine/Dockerfile
 RUN apk add --no-cache \
-	freetype-dev libpng-dev libjpeg-turbo-dev freetype libpng libjpeg-turbo \
-  && docker-php-ext-configure gd \
-    --with-gd \
-    --with-freetype-dir=/usr/include/ \
-    --with-png-dir=/usr/include/ \
-    --with-jpeg-dir=/usr/include/ && \
+	freetype-dev libpng-dev libjpeg-turbo-dev freetype libpng libjpeg-turbo libonig-dev sqlite3 \
+  && docker-php-ext-configure gd --with-freetype --with-jpeg && \
   NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
-  && docker-php-ext-install -j${NPROC} gd pdo pdo_mysql pdo_sqlite sqlite3 opcache zip \
+  && docker-php-ext-install -j${NPROC} gd pdo pdo_mysql pdo_sqlite opcache zip \
   && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 WORKDIR /srv/html
