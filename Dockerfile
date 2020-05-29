@@ -27,10 +27,10 @@ RUN rm -rf /etc/localtime \
 	
 # Support GD extension https://github.com/ThanisornJ/Docker-Laravel/blob/db92988506636273aa03e5101a47a5b52a6bfe73/docker-php-alpine/Dockerfile
 RUN apk add --no-cache \
-	freetype-dev libpng-dev libjpeg-turbo-dev freetype libpng libjpeg-turbo \
+	freetype-dev libpng-dev libjpeg-turbo-dev freetype libpng libjpeg-turbo sqlite-dev libzip-dev \
   && docker-php-ext-configure gd --with-freetype --with-jpeg && \
   NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
-  && docker-php-ext-install -j${NPROC} gd pdo pdo_mysql opcache  \
+  && docker-php-ext-install -j${NPROC} gd pdo pdo_mysql pdo_sqlite opcache zip \
   && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 WORKDIR /srv/html
