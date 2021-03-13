@@ -3,7 +3,7 @@ FROM php:7.4-fpm-alpine
 LABEL maintainer "jinlife <glucose1e@tom.com>"
 
 # Download customized Caddy
-ARG CADDY_URL="https://caddyserver.com/download/linux/amd64?plugins=http.git,http.prometheus,http.realip&license=personal&telemetry=off"
+ARG CADDY_URL="https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare"
 
 RUN curl --silent --show-error --fail --location \
     --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
