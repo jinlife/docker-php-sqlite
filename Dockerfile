@@ -1,12 +1,14 @@
 FROM php:7.4-fpm-alpine
 
-LABEL maintainer "Jinlife <admin@jinlife.com>"
+LABEL maintainer "jinlife <glucose1e@tom.com>"
 
 # Download customized Caddy
-ARG plugins="git,cors,realip,expires,cache,cloudflare"
+ARG CADDY_PLUGINS="git,cors,realip,expires,cache,jwt,login,prometheus,restic,cloudflare"
+ARG CADDY_URL="https://caddyserver.com/download/linux/amd64?plugins=${CADDY_PLUGINS}&license=personal&telemetry=off"
+
 RUN curl --silent --show-error --fail --location \
     --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-    "https://caddyserver.com/download/linux/amd64?plugins=http.git,http.cors,http.realip,http.expires,http.cache,http.jwt,http.login,http.prometheus,http.restic&license=personal&telemetry=off" \
+    "${CADDY_URL}" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
     && chmod 0755 /usr/bin/caddy \
     && /usr/bin/caddy -version
