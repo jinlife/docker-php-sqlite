@@ -3,12 +3,10 @@ FROM php:7.4-fpm-alpine
 LABEL maintainer "jinlife <glucose1e@tom.com>"
 
 # Download customized Caddy
-RUN curl --silent --show-error --fail --location \
-    --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
-    "https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare" \
-    | tar --no-same-owner -C /usr/bin/ -xz caddy \
-    && chmod 0755 /usr/bin/caddy \
-    && /usr/bin/caddy -version
+RUN set -eux; \
+        wget -O /usr/bin/caddy "https://caddyserver.com/api/download?os=linux&arch=amd64&p=github.com%2Fcaddy-dns%2Fcloudflare"; \
+        chmod +x /usr/bin/caddy; \
+        caddy version
 
 COPY Caddyfile /etc/Caddyfile
 
