@@ -16,6 +16,7 @@ $DOMAIN {
 			try_files {path} {path}/ /index.php
 		}
 	}
+	file_server
 	rewrite @try_files {http.matchers.file.relative}
     redir /feed.xml /feed 301
     root * /srv/html
@@ -34,6 +35,7 @@ cat > /etc/Caddyfile << EOF
 			try_files {path} {path}/ /index.php
 		}
 	}
+	file_server
 	rewrite @try_files {http.matchers.file.relative}
     redir /feed.xml /feed 301
     root * /srv/html
