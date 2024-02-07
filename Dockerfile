@@ -27,7 +27,7 @@ RUN apk add --no-cache \
 	freetype-dev libpng-dev libjpeg-turbo-dev freetype libpng libjpeg-turbo sqlite-dev libzip-dev \
   && docker-php-ext-configure gd --with-freetype --with-jpeg && \
   NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
-  && docker-php-ext-install -j${NPROC} gd pdo pdo_mysql pdo_sqlite opcache zip \
+  && docker-php-ext-install -j${NPROC} gd pdo pdo_mysql pdo_sqlite opcache zip calendar \
   && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 WORKDIR /srv/html
